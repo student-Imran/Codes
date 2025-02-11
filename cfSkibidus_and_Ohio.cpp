@@ -9,25 +9,28 @@ using namespace std;
 #define all(v) (v).begin(),(v).end()
 #define set_bits __builtin_popcountll  
 
+
 void solve()
 {
-   int n;
-   cin>>n;
-   int a[n],b[n];
-   map<int,int>ma;
-   for(int i=0;i<n;i++)cin>>a[i];
-   	for(int i=0;i<n;i++)
-   		{
-   			cin>>b[i];
-   			ma[b[i]]=a[i];
-   		}
-   		
-   		for(auto x:ma)
-   		{
-   			//cout<<x.second<<" ";
-   			cout<<b[x.second-1]<<" ";
-   		}cout<<'\n';
-
+   string s;
+   cin>>s;
+   int c=0;
+   for(int i=0;i<s.size()-1;i++)
+   {
+   	if(s[i]==s[i+1])
+   	{
+   		c=1;
+   		break;
+   	}
+   }
+  if(c==1)
+  {
+  	cout<<1<<'\n';
+  }
+  else
+  {
+  	cout<<s.size()<<'\n';
+  }
 }
 int main()
 {
@@ -35,13 +38,12 @@ int main()
 	cin.tie(NULL);
 
 
-	/*int t;
+	int t;
 	cin>>t;
 	while(t--)
-	*/{
+	{
 		solve();
 	}
 	return 0;
 
 }
-
