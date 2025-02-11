@@ -34,24 +34,28 @@ void solve()
    }
    ll ans=0;
   ll ans1=0;
+
    for(auto x:ma)
    {
    	int ind=x.second;
-      for(int i=0;i<m;i++)
+      int i;
+      for(i=0;i<m;i++)
       {
-      	
-      	if(i==0)
-      	{ans+=v[ind][i];}
-      else
-      {
-      	ans+=v[ind][i];
-      	ans+=v[ind][i-1];
-      }
-
-      	
-      }
+         if(i>0)
+         {
+      	ans+=v[ind][i]+v[ind][i-1];
+         ans1+=v[ind][i]+v[ind][i-1];
+         v[ind][i]+=v[ind][i-1];
+         }
+         else
+         {
+            ans+=v[ind][i];
+            ans1+=ans;
+            v[ind][i]=ans;
+         }
+      }ans=v[ind][i-1];
       
-   }cout<<ans<<'\n';
+   }cout<<ans1<<'\n';
 
 }
 int main()
