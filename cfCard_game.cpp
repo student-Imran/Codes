@@ -1,40 +1,42 @@
-#include<bits/stdc++.h>
-using namespace std; 
-void solve()
-{
-    int a,b,c,d;
-    cin>>a>>b>>c>>d;
-        int count=0;
-        if((a>c and b>=d) or (a>=c and b>d)){
-            count++;
-        }
-        if((a>d and b>=c) or (a>=d and b>c)){
-            count++;
-        }
-        if((b>c and a>=d) or (b>=c and a>d)){
-            count++;
-        }
-        if((b>d and a>=c) or (b>=d and a>c)){
-            count++;
-        }
-
-        cout<<count<<'\n';
-
-    
-}
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-
-    int t;
-    cin>>t;
-    while(t--)
-    {
-        solve();
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
+void solve(){
+    int n;cin>>n;
+    string s;cin>>s;
+    if(s[0]=='A' and s[n-1]=='A'){
+        cout<<"Alice"<<'\n';
     }
-    return 0;
+    else if(s[0]=='B' and s[n-1]=='B'){
+        cout<<"Bob"<<'\n';
+    }
+    else if(s[0]=='A'){
+        int c=count(s.begin(),s.end(),'B');
+        if(c==1){
+            cout<<"Alice\n";
+        }
+        else{
+            cout<<"Bob\n";
+        }
+    }
+    else if(s[0]=='B'){
 
+        if(s[n-2]=='B'){
+            cout<<"Bob\n";
+        }
+        else{
+            cout<<"Alice\n";
+        }
+    }
+  
 }
 
+int main() {
+  ios::sync_with_stdio(0);
+  cin.tie(0);
+
+  int t = 1; 
+  cin >> t;
+  while (t--)
+  solve();
+}
