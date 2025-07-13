@@ -2,9 +2,10 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Compile and Run C++ with input/output files (PowerShell)",
+      "label": "Compile and Run C++ (Current File) with I/O (PowerShell)",
       "type": "shell",
-      "command": "g++ 1.cpp -o 1; Get-Content input.txt | ./1 | Out-File output.txt",
+      // Compile only the current file ($file) and name the executable after it
+      "command": "g++ \"${file}\" -o \"${fileBasenameNoExtension}.exe\"; Get-Content input.txt | \".\\${fileBasenameNoExtension}.exe\" | Out-File output.txt",
       "group": {
         "kind": "build",
         "isDefault": true
