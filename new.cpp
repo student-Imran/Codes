@@ -1,62 +1,37 @@
-#include<bits/stdc++.h>
-using namespace std; 
+#include <iostream>
+#include <omp.h>
+#include <vector>
+#include <cstdlib>
+using namespace std;
 
-void solve()
-{
-   int n,k;cin>>n>>k;
-   vector<int> s(n),t(n);
-   for (int i = 0; i < n; ++i)
-   {
-     cin>>s[i];
-   }
-   for (int i = 0; i < n; ++i)
-   {
-     cin>>t[i];
-   }
-   multiset<int>parbo;
-   for (int i = 0; i < n; ++i)
-   {
-      parbo.insert((s[i]%k)); 
-   }
-   // for(auto x:parbo){
-   //  cout<<x<<" ";
-   // }cout<<'\n'; 
-   for (int i = 0; i < n; ++i)
-   {
-     if (parbo.find(t[i]%k)!=parbo.end())
-     {
-       parbo.erase(parbo.find(t[i]%k));
-     }
-    else if (parbo.find((k-(t[i]%k)))!=parbo.end())
-      {
-        parbo.erase(parbo.find(k-(t[i]%k)));
-      }
-     
-     else
-     {
-      cout<<"NO\n";
-      return;
-     }
-     
+int main() {
+    int m = 1024, n = 1024, p = 1024;
+    vector<vector<float>> A(m, vector<float>(n));
+    vector<vector<float>> B(n, vector<float>(p));
+    vector<vector<float>> C(m, vector<float>(p, 0));
 
-   }cout<<"YES\n";
-   
-   
-}  
+    // Initialize matrices
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            A[i][j] = rand() % 10;
 
-int main()
-{
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < p; j++)
+            B[i][j] = rand() % 10;
 
+    double start = omp_get_wtime();
 
-  int t;
-  cin>>t;
-  while(t--)
-  {
-    solve();
-  }
-  return 0;
+    #pragma omp parallel for collapse(2)
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < p; j++) {
+            float sum = 0;
+            for (int k = 0; k < n; k++) {
+                sum += A[i][k] * B[k][j];
+            }
+            C[i][j] = sum;
+        }
+    }
 
+    double end = omp_get_wtime();
+    cout << "Execution Time (CPU with OpenMP): " << (end - start) << " seconds" << endl;
 }
-
