@@ -3,35 +3,57 @@ using namespace std;
 #define ll long long int
 void solve()
 {
-   ll n, m;cin>>n>>m;
-   ll left=n-1;
-   ll right=left+left-1;
-   ll sum=left*(left+1)/2LL;
-   if(sum==right){
-    if(m>=left and m<=right){
-        cout<<1<<'\n';
+    ll n,rk,ck,rd,cd;
+    cin>>n>>rk>>ck>>rd>>cd;
+     if(rk==0 and ck==0){
+        cout<<max(rd,cd)<<'\n';
     }
-    else{
-        cout<<-1<<'\n';
-    }
-   }
-   else{
-    if(m==sum){
-        cout<<1<<'\n';
-        ll x=1,y=2;
-        for(int i=1;i<n-1;i++){
-            cout<<x<<" "<<y<<'\n';
-            x=y;
-            y++;
+    else if(rk==rd){
+        if(cd>ck){
+            cout<<cd<<'\n';
+        }
+        else{
+          cout<<(n-cd)<<'\n';
         }
     }
-    else if(m>=left and m<=right){
-        cout<<1<<'\n';
+    else if(cd==ck){
+        // cout<<1?<<' ';
+        if(rk>rd){
+            cout<<(n-rk)+(rk-rd)<<'\n';
+        }
+        else{
+          cout<<rd<<'\n';
+        }
     }
     else{
-        cout<<-1<<'\n';
+        if(rd>rk and cd>ck){
+            if(rd>cd){
+                cout<<rd<<'\n';
+            }else{
+                cout<<cd<<'\n';
+            }
+        }
+        else if(rd>rk and cd<ck){
+             // cout<<"ami2";
+            if((n-ck)>cd){
+                cout<<(n-ck)+(ck-cd)<<'\n';
+            }
+            else{
+                cout<<cd+(rd-rk)<<'\n';
+            }
+        }
+        else if(cd>ck and rd<rk){
+             // cout<<"ami3";
+            if((n-rk)>ck){
+                cout<<(n-rk)+(rk-rd)<<'\n';
+            }
+            else{
+                cout<<ck+(cd-ck)<<'\n';
+            }
+        }
     }
-   }
+
+}
 
 int main()
 {
